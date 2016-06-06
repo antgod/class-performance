@@ -19,13 +19,16 @@ let promise=(url)=>{
     })
 };
 
+let host;
 app.use(function * () {
-    if(~this.url.indexOf('favicon.ico')){
-        this.body="";
-        return;
+    let url=this.query.url;
+
+    if(url&&~url.indexOf('http')){
+        host=url;
+    }else{
+        url=host+this.url;
     }
 
-    let url = this.query.url;
     let body=yield promise(url);
 
     let scriptHtml= fs.readFileSync('./timing.js');
