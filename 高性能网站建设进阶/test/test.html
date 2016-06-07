@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        var start=Date.now();
+    </script>
+
+    <!-- 会阻塞页面加载 -->
+    <!--<script src="//cdn.bootcss.com/jquery/3.0.0-rc1/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/2.2.4/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/2.2.3/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/2.2.2/jquery.js" ></script>-->
+    <!--<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.js" ></script>-->
+
+    <script>
+
+         var arr=['//cdn.bootcss.com/jquery/3.0.0-rc1/jquery.js',
+                    '//cdn.bootcss.com/jquery/3.0.0-beta1/jquery.js',
+                    '//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.js',
+                    '//cdn.bootcss.com/jquery/2.2.4/jquery.js',
+                    '//cdn.bootcss.com/jquery/2.2.3/jquery.js',
+                    '//cdn.bootcss.com/jquery/2.2.2/jquery.js',
+                    '//cdn.bootcss.com/jquery/2.2.1/jquery.js'];
+
+        var loadend=Date.now();
+
+        for(var i =0;i<arr.length;i++){
+            var script=document.createElement('script');
+            script.src=arr[i];
+            document.documentElement.appendChild(script);  //不会阻塞页面加载
+        }
+
+//         while (true){
+//             var dateEnd=Date.now();
+//             if(dateEnd>start+1000){
+//                 break;
+//             }
+//         }
+
+        var jsend=Date.now();
+
+    </script>
+</head>
+<img src="http://img.ugirls.com/uploads/cooperate/baidu/20160519xinyang.jpg" />
+</body>
+<script>
+    var pageend=Date.now();
+
+    console.log('load',loadend-start);
+    console.log('js',jsend-loadend);
+    console.log('page',pageend-jsend);
+</script>
+</html>
