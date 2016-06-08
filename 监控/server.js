@@ -19,17 +19,28 @@ let promise=(url)=>{
     })
 };
 
-let host;
+
+let formatUrl=(body,host)=>{
+    var reg=/(?:href|src)=\"([^\"]*)\"/g;
+    return body.replace(reg,function(i,l){
+        if(~l.indexOf('http')){
+            return i;
+        }
+        return i.replace(l,host+l);
+    });
+};
+
+
 app.use(function * () {
-    let url=this.query.url;
+    let url=this.query.url,host;
 
     if(url&&~url.indexOf('http')){
         host=url;
-    }else{
-        url=host+this.url;
     }
 
     let body=yield promise(url);
+
+    body=formatUrl(body,host);
 
     let scriptHtml= fs.readFileSync('./timing.js');
     let script=`<script>${scriptHtml}</script>`;
